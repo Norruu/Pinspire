@@ -33,4 +33,10 @@ class User extends Authenticatable
     {
         return $this->role === 'admin';
     }
+
+    protected $casts = [
+    'email_verified_at' => 'datetime',
+    'password' => 'hashed',
+    'is_admin' => 'boolean', // Add this
+    ];
 }

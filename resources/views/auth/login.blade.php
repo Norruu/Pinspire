@@ -1,56 +1,164 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinspire Login</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="bg-[#fdeae7] min-h-screen flex items-center justify-center p-4 font-sans">
 
-    <div class="mb-8">
-        <h1 class="text-3xl font-extrabold text-gray-900">Login</h1>
-        <p class="mt-2 text-sm text-gray-600">
-            Welcome back to <span class="font-semibold text-rose-600">Pinspire</span>.
-        </p>
+    <!-- Main Card Container -->
+    <div class="bg-white rounded-[2rem] shadow-xl w-full max-w-4xl flex flex-col md:flex-row relative overflow-hidden">
+
+        <!-- Close Button (Top Right) -->
+        <button class="absolute top-6 right-6 text-gray-500 hover:text-gray-800 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+
+        <!-- Left Side Illustration Panel -->
+        <div class="hidden md:block w-1/2 p-3">
+            <div class="bg-[#fdeae7] h-full rounded-[1.5rem] flex flex-col justify-between relative overflow-hidden">
+                <!-- Branding -->
+                <div class="p-6">
+                    <h1 class="text-red-500 font-black text-xl tracking-tight">Pinspire.</h1>
+                </div>
+                <!-- Placeholder for the actual illustration -->
+                <div class="flex-grow flex items-center justify-center relative">
+                    <img src="{{ asset('images/Illustration.png') }}" alt="Illustration" class="object-cover w-full h-full rounded-b-[1.5rem]">
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side Form Panel -->
+        <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Login</h2>
+
+            <form action="{{ route('login') }}" method="POST">
+                @csrf
+
+                <!-- Email Field -->
+                <div class="mb-5">
+                    <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <!-- Mail Icon -->
+                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <input type="email" id="email" name="email" placeholder="example@gmail.com"
+                            class="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl text-sm focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition shadow-sm" required>
+                    </div>
+                </div>
+
+                                <!-- Password Field -->
+                <div class="mb-5">
+                    <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+                    <div class="relative">
+                        <!-- Icon Container (Pointer Events set to auto so we can click the eye) -->
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center">
+                            <!-- Lock Icon (Visible by default) -->
+                            <svg id="lock-icon" class="h-5 w-5 text-gray-400 transition-opacity duration-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+
+                            <!-- Eye Icon (Hidden by default, Cursor Pointer for clicking) -->
+                            <svg id="eye-icon" class="h-5 w-5 text-gray-400 cursor-pointer hidden transition-opacity duration-200 hover:text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                        </div>
+
+                        <input type="password" id="password" name="password" placeholder="********"
+                            class="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl text-sm focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition shadow-sm" required>
+                    </div>
+                </div>
+
+                <!-- Forgot Password -->
+                <div class="flex justify-end mb-6">
+                    <a href="{{ route('password.request') }}" class="text-sm font-semibold text-yellow-500 hover:text-yellow-600 hover:underline">
+                        Forgot Password?
+                    </a>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full bg-[#f67280] hover:bg-[#e05b69] text-white font-bold py-3.5 px-4 rounded-xl transition duration-200 shadow-md">
+                    Log In
+                </button>
+            </form>
+
+            <!-- Divider -->
+            <div class="mt-8 mb-6 flex items-center">
+                <div class="flex-grow border-t border-gray-300"></div>
+                <span class="px-4 text-sm text-gray-400 font-medium">Or Continue With</span>
+                <div class="flex-grow border-t border-gray-300"></div>
+            </div>
+
+            <!-- Social Logins -->
+            <div class="flex justify-center space-x-4 mb-8">
+                <!-- Google -->
+                <button class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition shadow-sm">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="Google">
+                </button>
+                <!-- Facebook -->
+                <button class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition shadow-sm text-[#1877F2]">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </button>
+                <!-- Apple -->
+                <button class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition shadow-sm text-black">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.14-.49-3.23 0-1.02.47-2.1.53-3.03-.43C4.18 16.7 3.3 11.2 6 8.16c.94-1.07 2.21-1.74 3.52-1.77 1.05-.04 2.05.64 2.67.64.63 0 1.83-.81 3.1-.71 1.63.1 2.87.69 3.65 1.76-3.1 1.79-2.62 5.9.46 7.1-1.03 2.67-2.22 4.47-2.35 4.54zm-2.92-15.68c.52-1.28.08-2.61-.83-3.6-1.12-1.1-2.62-1.35-3.6-.8-.58 1.13-.19 2.53.86 3.63 1.09 1.15 2.7 1.34 3.57.77z"/></svg>
+                </button>
+            </div>
+
+            <!-- Footer Link -->
+            <p class="text-center text-sm text-gray-600 font-medium">
+                Don't have an account?
+                <a href="{{ route('register') }}" class="text-gray-500 font-semibold hover:underline">Sign Up here</a>
+            </p>
+
+        </div>
     </div>
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+    <!-- Password Icon Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordInput = document.getElementById('password');
+            const lockIcon = document.getElementById('lock-icon');
+            const eyeIcon = document.getElementById('eye-icon');
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
-                required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+            // Listen for typing in the password field
+            passwordInput.addEventListener('input', function() {
+                if (this.value.length > 0) {
+                    // Hide lock, show eye
+                    lockIcon.classList.add('hidden');
+                    eyeIcon.classList.remove('hidden');
+                } else {
+                    // Show lock, hide eye if empty
+                    lockIcon.classList.remove('hidden');
+                    eyeIcon.classList.add('hidden');
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+                    // Reset to hidden password if they backspace everything
+                    passwordInput.type = 'password';
+                }
+            });
 
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
-                autocomplete="current-password" />
+            // Listen for clicking on the eye icon
+            eyeIcon.addEventListener('click', function() {
+                // Toggle between 'password' and 'text'
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text'; // Shows the password
+                    eyeIcon.classList.add('text-yellow-500'); // Optional: change color when active
+                } else {
+                    passwordInput.type = 'password'; // Hides the password
+                    eyeIcon.classList.remove('text-yellow-500');
+                }
+            });
+        });
+    </script>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox"
-                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button
-                class="w-full justify-center bg-rose-500 hover:bg-rose-600 focus:bg-rose-600 active:bg-rose-700">
-                Log in
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</body>
+</html>
