@@ -6,7 +6,7 @@
     <title>Pinspire - Get your next idea</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-[#fdeae7] font-sans antialiased text-gray-900 overflow-x-hidden relative">
+<body class="bg-[#f9fafb] font-sans antialiased text-gray-900 overflow-x-hidden relative">
 
     <!-- Top Navigation -->
     <nav class="sticky absolute top-0 w-full z-50 px-6 py-4 flex items-center justify-between bg-white/80 backdrop-blur-md">
@@ -38,73 +38,51 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header id="home" class="pt-40 pb-16 px-4 text-center">
-        <h1 class="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight mb-6 transition-all duration-500">
-            Get your next <br class="md:hidden">
-            <!-- Added an ID to target the text -->
-            <span id="hero-text" class="text-green-600 block mt-2 transition-colors duration-500">home decor idea</span>
+    <!-- New Hero Section -->
+    <header id="home" class="pt-32 pb-24 px-4 text-center relative overflow-hidden flex flex-col items-center justify-center min-h-[85vh] bg-[#f9fafb]">
+
+        <!-- Headline -->
+        <h1 class="text-6xl sm:text-7xl lg:text-[6rem] font-medium tracking-tight mb-16 text-[#1a1a1a] max-w-4xl mx-auto leading-[1.05] relative z-10">
+            A place to display your <br/> masterpiece.
         </h1>
-        <!-- Animated dots indicator -->
-        <div id="hero-dots" class="flex justify-center gap-3 mt-8 mb-12">
-            <!-- Dots will be updated by JS -->
-            <div class="w-3 h-3 rounded-full bg-green-600 transition-colors duration-500"></div>
-            <div class="w-3 h-3 rounded-full bg-gray-300 transition-colors duration-500"></div>
-            <div class="w-3 h-3 rounded-full bg-gray-300 transition-colors duration-500"></div>
-            <div class="w-3 h-3 rounded-full bg-gray-300 transition-colors duration-500"></div>
+        
+        <!-- Floating Badges -->
+        <div class="hidden md:flex absolute top-40 left-[15%] lg:left-[22%] bg-[#1d4ed8] text-white px-5 py-2.5 rounded-3xl rounded-bl-sm font-semibold shadow-lg transform -rotate-6 animate-bounce" style="animation-duration: 3s;">
+            @Photos
         </div>
+        <div class="hidden md:flex absolute top-56 right-[15%] lg:right-[22%] bg-[#10b981] text-white px-5 py-2.5 rounded-3xl rounded-br-sm font-semibold shadow-lg transform rotate-6 animate-bounce" style="animation-duration: 4s;">
+            @Design
+        </div>
+
+        <!-- Fanned Cards Container -->
+        <div class="relative w-full max-w-5xl h-64 md:h-80 mx-auto mb-16 flex justify-center items-center z-0 perspective-1000 mt-8">
+            <!-- Card 1 -->
+            <div class="absolute w-40 h-48 md:w-56 md:h-64 rounded-2xl overflow-hidden shadow-2xl transform -rotate-[15deg] -translate-x-36 md:-translate-x-56 hover:-translate-y-6 hover:rotate-[-5deg] hover:z-50 transition-all duration-300 border-4 border-white">
+                <img src="https://i.pinimg.com/1200x/b6/0b/b2/b60bb2181a89ae957c73f98158566c45.jpg" class="w-full h-full object-cover" alt="Art 1">
+            </div>
+            <!-- Card 2 -->
+            <div class="absolute w-40 h-48 md:w-56 md:h-64 rounded-2xl overflow-hidden shadow-2xl transform -rotate-6 -translate-x-16 md:-translate-x-28 hover:-translate-y-6 hover:rotate-[-2deg] hover:z-50 transition-all duration-300 border-4 border-white z-10 bg-yellow-400">
+                <img src="https://i.pinimg.com/736x/2f/dc/15/2fdc1596cfa8c364fd33cb0a93f50175.jpg" class="w-full h-full object-cover mix-blend-multiply opacity-90" alt="Art 2">
+            </div>
+            <!-- Card 3 -->
+            <div class="absolute w-40 h-48 md:w-56 md:h-64 rounded-2xl overflow-hidden shadow-2xl transform rotate-0 hover:-translate-y-6 hover:z-50 transition-all duration-300 border-4 border-white z-20">
+                <img src="https://i.pinimg.com/1200x/47/25/b0/4725b0cc75c586bbab9a9af8ff5b9337.jpg" class="w-full h-full object-cover" alt="Art 3">
+            </div>
+            <!-- Card 4 -->
+            <div class="absolute w-40 h-48 md:w-56 md:h-64 rounded-2xl overflow-hidden shadow-2xl transform rotate-6 translate-x-16 md:translate-x-28 hover:-translate-y-6 hover:rotate-[2deg] hover:z-50 transition-all duration-300 border-4 border-white z-30 bg-red-500">
+                <img src="https://i.pinimg.com/736x/56/1e/f4/561ef4fe87b674e9a2aa012965c6b44c.jpg" class="w-full h-full object-cover mix-blend-multiply opacity-90" alt="Art 4">
+            </div>
+            <!-- Card 5 -->
+            <div class="absolute w-40 h-48 md:w-56 md:h-64 rounded-2xl overflow-hidden shadow-2xl transform rotate-[15deg] translate-x-36 md:translate-x-56 hover:-translate-y-6 hover:rotate-[5deg] hover:z-50 transition-all duration-300 border-4 border-white z-40 bg-green-600">
+                <img src="https://i.pinimg.com/736x/b0/5a/6f/b05a6f927be08df361e226475ed310fa.jpg" class="w-full h-full object-cover mix-blend-multiply opacity-90" alt="Art 5">
+            </div>
+        </div>
+
+        <!-- Subheadline -->
+        <p class="text-base md:text-lg text-gray-700 font-medium mb-10 max-w-2xl mx-auto z-10 relative px-4">
+            Artists can display their masterpieces, and buyers can discover and <br class="hidden md:block"/> support amazing talent from around the world.
+        </p>
     </header>
-
-    <!-- Background Masonry Grid (Functional) -->
-    <section class="relative max-w-[1600px] mx-auto px-4 h-[600px] overflow-hidden">
-        <!-- Gradient overlay to fade the bottom to white -->
-        <div class="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-white via-white/80 to-transparent z-10"></div>
-
-        <!-- The Grid (Added an ID here) -->
-        <div id="hero-grid" class="columns-2 md:columns-4 lg:columns-6 gap-4 space-y-4 opacity-80 pointer-events-none transition-opacity duration-700">
-            <!-- 9 Image containers. We gave each img a class 'grid-img' so JS can swap the src -->
-            <div class="break-inside-avoid rounded-2xl overflow-hidden shadow-sm">
-                <img class="grid-img w-full object-cover transition-all duration-700" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400&h=600&fit=crop">
-            </div>
-            <div class="break-inside-avoid rounded-2xl overflow-hidden shadow-sm">
-                <img class="grid-img w-full object-cover transition-all duration-700" src="https://images.unsplash.com/photo-1556020685-e631933f1107?w=400&h=400&fit=crop">
-            </div>
-            <div class="break-inside-avoid rounded-2xl overflow-hidden shadow-sm">
-                <img class="grid-img w-full object-cover transition-all duration-700" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=400&h=700&fit=crop">
-            </div>
-            <div class="break-inside-avoid rounded-2xl overflow-hidden shadow-sm">
-                <img class="grid-img w-full object-cover transition-all duration-700" src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=500&fit=crop">
-            </div>
-            <div class="break-inside-avoid rounded-2xl overflow-hidden shadow-sm">
-                <img class="grid-img w-full object-cover transition-all duration-700" src="https://images.unsplash.com/photo-1598928506311-c55dd1040854?w=400&h=800&fit=crop">
-            </div>
-            <div class="break-inside-avoid rounded-2xl overflow-hidden shadow-sm hidden md:block">
-                <img class="grid-img w-full object-cover transition-all duration-700" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&h=450&fit=crop">
-            </div>
-            <div class="break-inside-avoid rounded-2xl overflow-hidden shadow-sm hidden md:block">
-                <img class="grid-img w-full object-cover transition-all duration-700" src="https://images.unsplash.com/photo-1505691938895-1758d7bef511?w=400&h=600&fit=crop">
-            </div>
-            <div class="break-inside-avoid rounded-2xl overflow-hidden shadow-sm hidden lg:block">
-                <img class="grid-img w-full object-cover transition-all duration-700" src="https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=400&h=500&fit=crop">
-            </div>
-            <div class="break-inside-avoid rounded-2xl overflow-hidden shadow-sm hidden lg:block">
-                <img class="grid-img w-full object-cover transition-all duration-700" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=700&fit=crop">
-            </div>
-        </div>
-
-        <!-- Floating Sign up CTA over the fade -->
-        <div class="absolute bottom-16 left-0 right-0 z-20 flex justify-center">
-            @if (!Auth::check())
-                <a href="{{ route('register') }}" class="bg-[#e60023] hover:bg-[#ad081b] text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg transition transform hover:scale-105">
-                    Sign up to see more
-                </a>
-            @else
-                <a href="{{ route('dashboard') }}" class="bg-[#e60023] hover:bg-[#ad081b] text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg transition transform hover:scale-105">
-                    Continue to Feed
-                </a>
-            @endif
-        </div>
-    </section>
 
     <!-- About Us Section -->
     <section id="about" class="py-24 bg-white relative">
@@ -126,11 +104,11 @@
                     <!-- Stats / Features -->
                     <div class="flex flex-col sm:flex-row gap-4">
                         <div class="bg-[#fdeae7] p-6 rounded-3xl text-center flex-1">
-                            <h4 class="text-3xl font-black text-red-500 mb-1">1M+</h4>
+                            <h4 class="text-3xl font-black text-red-500 mb-1">1+</h4>
                             <p class="text-sm font-semibold text-gray-700">Active Creators</p>
                         </div>
                         <div class="bg-[#fdeae7] p-6 rounded-3xl text-center flex-1">
-                            <h4 class="text-3xl font-black text-red-500 mb-1">50M+</h4>
+                            <h4 class="text-3xl font-black text-red-500 mb-1">15+</h4>
                             <p class="text-sm font-semibold text-gray-700">Ideas Saved</p>
                         </div>
                     </div>
@@ -143,8 +121,8 @@
 
                     <!-- Image Collage -->
                     <div class="grid grid-cols-2 gap-4">
-                        <img src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?w=500&h=700&fit=crop" alt="Inspiration" class="rounded-3xl w-full h-72 md:h-80 object-cover transform translate-y-8 shadow-xl border-4 border-white">
-                        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=500&h=700&fit=crop" alt="Home Decor" class="rounded-3xl w-full h-72 md:h-80 object-cover shadow-xl border-4 border-white">
+                        <img src="https://i.pinimg.com/736x/89/fb/65/89fb655f2a04b5d7a33d4aef8683f096.jpg" alt="Inspiration" class="rounded-3xl w-full h-72 md:h-80 object-cover transform translate-y-8 shadow-xl border-4 border-white">
+                        <img src="https://i.pinimg.com/736x/66/91/9e/66919ebf625fc5a45a4ad4814c6f9371.jpg" alt="Home Decor" class="rounded-3xl w-full h-72 md:h-80 object-cover shadow-xl border-4 border-white">
                     </div>
                 </div>
 
@@ -172,7 +150,7 @@
                     <h3 class="text-2xl font-bold text-gray-900">Ryan Jay Madayag</h3>
                     <p class="text-red-500 font-semibold mb-4">Founder & Lead Developer</p>
                     <p class="text-gray-500 text-sm leading-relaxed">
-                        Daniel created Pinspire with a vision to make finding inspiration easier, faster, and more beautiful for everyone.
+                        Ryan Jay created Pinspire with a vision to make finding inspiration easier, faster, and more beautiful for everyone.
                     </p>
                 </div>
 
@@ -182,7 +160,7 @@
                     <h3 class="text-2xl font-bold text-gray-900">Robel Andrew Ambahan</h3>
                     <p class="text-red-500 font-semibold mb-4">Lead Designer</p>
                     <p class="text-gray-500 text-sm leading-relaxed">
-                        Jane ensures every pixel on Pinspire is perfect, bringing a minimalist and modern touch to the entire platform.
+                        Robel ensures every pixel on Pinspire is perfect, bringing a minimalist and modern touch to the entire platform.
                     </p>
                 </div>
 
@@ -192,7 +170,7 @@
                     <h3 class="text-2xl font-bold text-gray-900">Jerovi Vargas</h3>
                     <p class="text-red-500 font-semibold mb-4">Assistant Developer</p>
                     <p class="text-gray-500 text-sm leading-relaxed">
-                        John keeps the Pinspire community safe, engaged, and ensures that millions of creators can share their best ideas.
+                        Jerovi keeps the Pinspire community safe, engaged, and ensures that millions of creators can share their best ideas.
                     </p>
                 </div>
 
@@ -202,7 +180,7 @@
                     <h3 class="text-2xl font-bold text-gray-900">John Rigo Gulmatico</h3>
                     <p class="text-red-500 font-semibold mb-4">Quality Assurance</p>
                     <p class="text-gray-500 text-sm leading-relaxed">
-                        John keeps the Pinspire community safe, engaged, and ensures that millions of creators can share their best ideas.
+                        John Rigo keeps the Pinspire community safe, engaged, and ensures that millions of creators can share their best ideas.
                     </p>
                 </div>
 
@@ -216,119 +194,6 @@
             <p class="text-gray-400 text-sm font-medium">&copy; {{ date('Y') }} Pinspire. All rights reserved.</p>
         </div>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Carousel Data Configurations
-            const themes = [
-                {
-                    text: "home decor idea",
-                    colorClass: "text-green-600",
-                    bgClass: "bg-green-600",
-                    images: [
-                        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400&h=600&fit=crop",
-                        "https://images.unsplash.com/photo-1556020685-e631933f1107?w=400&h=400&fit=crop",
-                        "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=400&h=700&fit=crop",
-                        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=500&fit=crop",
-                        "https://images.unsplash.com/photo-1598928506311-c55dd1040854?w=400&h=800&fit=crop",
-                        "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&h=450&fit=crop",
-                        "https://images.unsplash.com/photo-1505691938895-1758d7bef511?w=400&h=600&fit=crop",
-                        "https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=400&h=500&fit=crop",
-                        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=700&fit=crop"
-                    ]
-                },
-                {
-                    text: "weeknight dinner idea",
-                    colorClass: "text-yellow-500",
-                    bgClass: "bg-yellow-500",
-                    images: [
-                        "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=600&fit=crop",
-                        "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=400&fit=crop",
-                        "https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?w=400&h=700&fit=crop",
-                        "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400&h=500&fit=crop",
-                        "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=800&fit=crop",
-                        "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400&h=450&fit=crop",
-                        "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=600&fit=crop",
-                        "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=500&fit=crop",
-                        "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=700&fit=crop"
-                    ]
-                },
-                {
-                    text: "summer outfit idea",
-                    colorClass: "text-blue-500",
-                    bgClass: "bg-blue-500",
-                    images: [
-                        "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=600&fit=crop",
-                        "https://images.unsplash.com/photo-1434389678369-e84013146b28?w=400&h=400&fit=crop",
-                        "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=400&h=700&fit=crop",
-                        "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400&h=500&fit=crop",
-                        "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&h=800&fit=crop",
-                        "https://images.unsplash.com/photo-1550639525-c97d455acf70?w=400&h=450&fit=crop",
-                        "https://images.unsplash.com/photo-1516762689617-e1cffcef479d?w=400&h=600&fit=crop",
-                        "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=400&h=500&fit=crop",
-                        "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=400&h=700&fit=crop"
-                    ]
-                },
-                {
-                    text: "DIY project idea",
-                    colorClass: "text-red-500",
-                    bgClass: "bg-red-500",
-                    images: [
-                        "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=400&h=600&fit=crop",
-                        "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=400&h=400&fit=crop",
-                        "https://images.unsplash.com/photo-1490412210859-994388cc0746?w=400&h=700&fit=crop",
-                        "https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?w=400&h=500&fit=crop",
-                        "https://images.unsplash.com/photo-1506806732259-39c2d0268443?w=400&h=800&fit=crop",
-                        "https://images.unsplash.com/photo-1611078564104-58a558564f9b?w=400&h=450&fit=crop",
-                        "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=400&h=600&fit=crop",
-                        "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=400&h=500&fit=crop",
-                        "https://images.unsplash.com/photo-1520699049698-acd2fce18eb4?w=400&h=700&fit=crop"
-                    ]
-                }
-            ];
-
-            let currentIndex = 0;
-            const heroText = document.getElementById('hero-text');
-            const dots = document.getElementById('hero-dots').children;
-            const gridContainer = document.getElementById('hero-grid');
-            const images = document.querySelectorAll('.grid-img');
-
-            function updateCarousel() {
-                currentIndex = (currentIndex + 1) % themes.length;
-                const theme = themes[currentIndex];
-
-                // 1. Update text and color
-                heroText.style.opacity = 0; // fade out
-
-                setTimeout(() => {
-                    heroText.innerText = theme.text;
-                    // Remove all possible colors and add the new one
-                    heroText.className = `block mt-2 transition-all duration-500 ${theme.colorClass}`;
-                    heroText.style.opacity = 1; // fade in
-                }, 300);
-
-                // 2. Update Dots
-                Array.from(dots).forEach((dot, index) => {
-                    dot.className = `w-3 h-3 rounded-full transition-colors duration-500 ${index === currentIndex ? theme.bgClass : 'bg-gray-300'}`;
-                });
-
-                // 3. Update Images (with a slight fade effect)
-                gridContainer.style.opacity = 0.4;
-
-                setTimeout(() => {
-                    images.forEach((img, index) => {
-                        if(theme.images[index]) {
-                            img.src = theme.images[index];
-                        }
-                    });
-                    gridContainer.style.opacity = 0.8;
-                }, 500);
-            }
-
-            // Run the carousel every 4 seconds
-            setInterval(updateCarousel, 3000);
-        });
-    </script>
 
 </body>
 </html>

@@ -12,11 +12,11 @@
     <div class="bg-white rounded-[2rem] shadow-xl w-full max-w-4xl flex flex-col md:flex-row relative overflow-hidden">
 
         <!-- Close Button (Top Right) -->
-        <button class="absolute top-6 right-6 text-gray-500 hover:text-gray-800 transition z-10">
+        {{-- <button class="absolute top-6 right-6 text-gray-500 hover:text-gray-800 transition z-10">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
-        </button>
+        </button> --}}
 
         <!-- Left Side Illustration Panel -->
         <div class="hidden md:block w-1/2 p-3">

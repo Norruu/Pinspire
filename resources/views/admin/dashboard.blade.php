@@ -12,7 +12,7 @@
     <aside class="w-64 bg-white border-r border-gray-200 flex flex-col justify-between shrink-0">
         <div>
             <!-- Admin Branding -->
-            <div class="h-16 flex items-center px-6 border-b border-gray-200">
+            <div class="h-16 flex items-center px-6 border-gray-200">
                 <h1 class="text-red-500 font-black text-xl tracking-tight flex items-center gap-2">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.91 2.168-2.91 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.184 0 7.436 2.981 7.436 6.958 0 4.156-2.615 7.502-6.248 7.502-1.222 0-2.373-.635-2.768-1.385l-.754 2.877c-.273 1.042-1.012 2.348-1.506 3.143A11.966 11.966 0 0012 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
                     Admin Panel
@@ -40,7 +40,7 @@
         </div>
 
         <!-- Logout / Profile -->
-        <div class="p-4 border-t border-gray-200">
+        <div class="p-4 border-gray-200">
             <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-gray-50 hover:text-gray-900 rounded-xl font-medium transition">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                 Back to App
@@ -59,21 +59,23 @@
             </div>
         </header>
 
-        <div class="flex-1 overflow-y-auto p-8 flex flex-col justify-between min-h-0">
+        <div class="flex-1 overflow-y-auto">
+            <div class="min-h-full flex flex-col">
+                <div class="flex-1 p-8">
 
             <!-- Success/Error Alerts (Always visible regardless of tab) -->
             @if(session('success'))
-                <div class="mb-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl relative">
-                    <strong class="font-bold">Success!</strong>
-                    <span class="block sm:inline">{{ session('success') }}</span>
-                </div>
-            @endif
-            @if(session('error'))
-                <div class="mb-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl relative">
-                    <strong class="font-bold">Error!</strong>
-                    <span class="block sm:inline">{{ session('error') }}</span>
-                </div>
-            @endif
+                    <div class="mb-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl relative">
+                        <strong class="font-bold">Success!</strong>
+                        <span class="block sm:inline">{{ session('success') }}</span>
+                    </div>
+                @endif
+                @if(session('error'))
+                    <div class="mb-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl relative">
+                        <strong class="font-bold">Error!</strong>
+                        <span class="block sm:inline">{{ session('error') }}</span>
+                    </div>
+                @endif
 
             <!-- ========================================== -->
             <!-- DASHBOARD SECTION -->
@@ -170,11 +172,21 @@
             <!-- ========================================== -->
             <div id="section-users" class="hidden">
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-10">
-                    <div class="px-6 py-5 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                    <div class="px-6 py-4 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gray-50/50">
                         <h3 class="text-lg font-bold text-gray-800">Manage Users</h3>
+                        <!-- NEW: Users Search Bar -->
+                        <div class="relative w-full sm:w-64">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                            </div>
+                            <input type="text" id="userSearch" placeholder="Search name or email..."
+                                class="block w-full pl-9 pr-3 py-2 border border-gray-200 rounded-full leading-5 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm transition shadow-sm">
+                        </div>
                     </div>
                     <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
+                        <table class="w-full text-left border-collapse" id="usersTable">
                             <thead>
                                 <tr class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider">
                                     <th class="px-6 py-3 font-medium">User</th>
@@ -185,13 +197,13 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100 text-sm">
-                                @foreach ($recentUsers as $user)
-                                    <tr class="hover:bg-gray-50 transition">
+                                @forelse ($recentUsers as $user)
+                                    <tr class="hover:bg-gray-50 transition user-row">
                                         <td class="px-6 py-4 flex items-center gap-3">
                                             <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=random" class="w-8 h-8 rounded-full">
-                                            <span class="font-semibold text-gray-800">{{ $user->name }}</span>
+                                            <span class="font-semibold text-gray-800 user-name">{{ $user->name }}</span>
                                         </td>
-                                        <td class="px-6 py-4 text-gray-500">{{ $user->email }}</td>
+                                        <td class="px-6 py-4 text-gray-500 user-email">{{ $user->email }}</td>
                                         <td class="px-6 py-4 text-gray-500">{{ $user->created_at->format('M d, Y') }}</td>
                                         <td class="px-6 py-4">
                                             <form action="{{ route('admin.users.role', $user) }}" method="POST">
@@ -205,14 +217,18 @@
                                         </td>
                                         <td class="px-6 py-4 text-right">
                                             @if($user->id !== Auth::id())
-                                            <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="inline-block" onsubmit="return confirm('Delete this user? This cannot be undone!');">
+                                            <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="inline-block">
                                                 @csrf @method('DELETE')
-                                                <button type="submit" class="text-red-400 hover:text-red-600 transition font-bold">Delete</button>
+                                                <button type="button" onclick="openDeleteModal(this.closest('form'), 'Delete User', 'Are you sure you want to permanently delete {{ addslashes($user->name) }}? This cannot be undone.')" class="text-red-400 hover:text-red-600 transition font-bold">Delete</button>
                                             </form>
                                             @endif
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr class="empty-state-row">
+                                        <td colspan="5" class="px-6 py-8 text-center text-gray-500">No users found.</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -258,11 +274,23 @@
 
                     <!-- Recent Pins Table -->
                     <div class="xl:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                        <div class="px-6 py-5 border-b border-gray-100 bg-gray-50/50">
+
+                        <!-- NEW: Pins Search Bar -->
+                        <div class="px-6 py-4 border-b border-gray-100 bg-gray-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                             <h3 class="text-lg font-bold text-gray-800">Manage Recent Pins</h3>
+                            <div class="relative w-full sm:w-64">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                    </svg>
+                                </div>
+                                <input type="text" id="pinSearch" placeholder="Search by title..."
+                                    class="block w-full pl-9 pr-3 py-2 border border-gray-200 rounded-full leading-5 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500 text-sm transition shadow-sm">
+                            </div>
                         </div>
+
                         <div class="overflow-x-auto">
-                            <table class="w-full text-left border-collapse">
+                            <table class="w-full text-left border-collapse" id="pinsTable">
                                 <thead>
                                     <tr class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider">
                                         <th class="px-6 py-3 font-medium">Pin Preview</th>
@@ -272,7 +300,7 @@
                                 </thead>
                                 <tbody class="divide-y divide-gray-100 text-sm">
                                     @forelse ($recentPins as $pin)
-                                        <tr class="hover:bg-gray-50 transition group">
+                                        <tr class="hover:bg-gray-50 transition group pin-row">
                                             <!-- Image Preview -->
                                             <td class="px-6 py-4">
                                                 <div class="w-20 h-20 rounded-xl overflow-hidden border border-gray-200 bg-gray-100 shadow-sm">
@@ -283,13 +311,12 @@
                                                 </div>
                                             </td>
 
-                                                                                        <!-- Edit Inline Form -->
+                                            <!-- Edit Inline Form -->
                                             <td class="px-6 py-4">
-                                                <!-- CRITICAL FIX: Added enctype="multipart/form-data" here! -->
                                                 <form id="edit-pin-{{ $pin->id }}" action="{{ route('admin.pins.update', $pin) }}" method="POST" enctype="multipart/form-data" class="space-y-2">
                                                     @csrf @method('PATCH')
 
-                                                    <input type="text" name="title" value="{{ $pin->title }}" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm px-3 py-1.5" placeholder="Title">
+                                                    <input type="text" name="title" value="{{ $pin->title }}" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm px-3 py-1.5 pin-title-input" placeholder="Title">
 
                                                     <input type="url" name="image_link" value="{{ str_starts_with($pin->image, 'http') ? $pin->image : '' }}" class="w-full rounded-md border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-xs px-2 py-1.5" placeholder="Paste new image URL">
 
@@ -310,15 +337,15 @@
                                                     <button type="submit" form="edit-pin-{{ $pin->id }}" class="text-blue-500 hover:text-blue-700 transition font-bold">Save</button>
 
                                                     <!-- Delete Form -->
-                                                    <form action="{{ route('admin.pins.destroy', $pin) }}" method="POST" onsubmit="return confirm('Delete this pin?');">
+                                                    <form action="{{ route('admin.pins.destroy', $pin) }}" method="POST">
                                                         @csrf @method('DELETE')
-                                                        <button type="submit" class="text-red-400 hover:text-red-600 transition font-bold">Delete</button>
+                                                        <button type="button" onclick="openDeleteModal(this.closest('form'), 'Delete Pin', 'Are you sure you want to permanently delete this pin?')" class="text-red-400 hover:text-red-600 transition font-bold">Delete</button>
                                                     </form>
                                                 </div>
                                             </td>
                                         </tr>
                                     @empty
-                                        <tr>
+                                        <tr class="empty-state-row">
                                             <td colspan="3" class="px-6 py-8 text-center text-gray-500">No pins created yet.</td>
                                         </tr>
                                     @endforelse
@@ -329,18 +356,42 @@
                 </div>
             </div>
 
-            <footer class="bg-[#fdeae7] border-t border-gray-200 pt-8 mt-12 w-full">
-                <div class="max-w-7xl mx-auto px-6 text-center">
-                    <p class="text-gray-400 text-sm font-medium">&copy; {{ date('Y') }} Pinspire. All rights reserved.</p>
-                </div>
-            </footer>
-
+            </div>
+             <footer class="bg-[#fdeae7] border-gray-200 py-8 shrink-0">
+                    <div class="max-w-7xl mx-auto px-6 text-center">
+                        <p class="text-gray-400 text-sm font-medium">&copy; {{ date('Y') }} Pinspire. All rights reserved.</p>
+                    </div>
+                </footer>
+            </div>
         </div>
     </main>
 
-    <!-- Vanilla JS to Handle Tab Switching -->
+        <!-- Custom Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-gray-900/40 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <div id="deleteModalCard" class="bg-white rounded-[2rem] shadow-2xl w-full max-w-sm mx-4 p-8 transform scale-95 opacity-0 transition-all duration-300">
+            <!-- Warning Icon -->
+            <div class="flex items-center justify-center w-16 h-16 rounded-full bg-red-50 text-red-500 mx-auto mb-6">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            </div>
+
+            <h3 class="text-2xl font-black text-center text-gray-900 mb-2" id="deleteModalTitle">Delete Item?</h3>
+            <p class="text-center text-gray-500 mb-8" id="deleteModalMessage">Are you sure you want to delete this?</p>
+
+            <div class="flex gap-4">
+                <button type="button" onclick="closeDeleteModal()" class="flex-1 px-5 py-3.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-full transition">
+                    Cancel
+                </button>
+                <button type="button" id="confirmDeleteBtn" class="flex-1 px-5 py-3.5 bg-[#e60023] hover:bg-[#ad081b] text-white font-bold rounded-full transition shadow-md">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vanilla JS to Handle Tab Switching and Search Filters -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Tab Switching Logic ---
             const buttons = {
                 'dashboard': document.getElementById('btn-dashboard'),
                 'users': document.getElementById('btn-users'),
@@ -386,6 +437,94 @@
 
             const activeTab = sessionStorage.getItem('adminActiveTab') || 'dashboard';
             switchTab(activeTab);
+
+            // --- User Search Filter Logic ---
+            const userSearchInput = document.getElementById('userSearch');
+            if (userSearchInput) {
+                userSearchInput.addEventListener('input', function(e) {
+                    const searchTerm = e.target.value.toLowerCase();
+                    const rows = document.querySelectorAll('#usersTable tbody tr.user-row');
+
+                    rows.forEach(row => {
+                        const name = row.querySelector('.user-name').textContent.toLowerCase();
+                        const email = row.querySelector('.user-email').textContent.toLowerCase();
+
+                        if (name.includes(searchTerm) || email.includes(searchTerm)) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+                });
+            }
+
+            // --- Pin Search Filter Logic ---
+            const pinSearchInput = document.getElementById('pinSearch');
+            if (pinSearchInput) {
+                pinSearchInput.addEventListener('input', function(e) {
+                    const searchTerm = e.target.value.toLowerCase();
+                    const rows = document.querySelectorAll('#pinsTable tbody tr.pin-row');
+
+                    rows.forEach(row => {
+                        const titleInput = row.querySelector('.pin-title-input');
+                        if (titleInput) {
+                            const title = titleInput.value.toLowerCase();
+                            if (title.includes(searchTerm)) {
+                                row.style.display = '';
+                            } else {
+                                row.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            }
+
+                    // --- Custom Delete Modal Logic ---
+        let deleteFormToSubmit = null;
+        const deleteModal = document.getElementById('deleteModal');
+        const deleteModalCard = document.getElementById('deleteModalCard');
+
+        window.openDeleteModal = function(form, title, message) {
+            deleteFormToSubmit = form;
+            document.getElementById('deleteModalTitle').innerText = title;
+            document.getElementById('deleteModalMessage').innerText = message;
+
+            // Show modal
+            deleteModal.classList.remove('hidden');
+            deleteModal.classList.add('flex');
+
+            // Trigger animations
+            setTimeout(() => {
+                deleteModal.classList.remove('opacity-0');
+                deleteModalCard.classList.remove('scale-95', 'opacity-0');
+                deleteModalCard.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        window.closeDeleteModal = function() {
+            deleteFormToSubmit = null;
+
+            // Revert animations
+            deleteModal.classList.add('opacity-0');
+            deleteModalCard.classList.remove('scale-100', 'opacity-100');
+            deleteModalCard.classList.add('scale-95', 'opacity-0');
+
+            // Hide modal after animation finishes
+            setTimeout(() => {
+                deleteModal.classList.add('hidden');
+                deleteModal.classList.remove('flex');
+            }, 300);
+        }
+
+        // Handle actual deletion
+        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+        if (confirmDeleteBtn) {
+            confirmDeleteBtn.addEventListener('click', () => {
+                if (deleteFormToSubmit) {
+                    deleteFormToSubmit.submit();
+                }
+            });
+        }
         });
     </script>
 </body>

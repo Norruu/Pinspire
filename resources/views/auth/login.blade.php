@@ -12,11 +12,11 @@
     <div class="bg-white rounded-[2rem] shadow-xl w-full max-w-4xl flex flex-col md:flex-row relative overflow-hidden">
 
         <!-- Close Button (Top Right) -->
-        <button class="absolute top-6 right-6 text-gray-500 hover:text-gray-800 transition">
+        {{-- <button class="absolute top-6 right-6 text-gray-500 hover:text-gray-800 transition">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
-        </button>
+        </button> --}}
 
         <!-- Left Side Illustration Panel -->
         <div class="hidden md:block w-1/2 p-3">
@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                                <!-- Password Field -->
+                <!-- Password Field -->
                 <div class="mb-5">
                     <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
                     <div class="relative">
@@ -91,31 +91,8 @@
                 </button>
             </form>
 
-            <!-- Divider -->
-            <div class="mt-8 mb-6 flex items-center">
-                <div class="flex-grow border-t border-gray-300"></div>
-                <span class="px-4 text-sm text-gray-400 font-medium">Or Continue With</span>
-                <div class="flex-grow border-t border-gray-300"></div>
-            </div>
-
-            <!-- Social Logins -->
-            <div class="flex justify-center space-x-4 mb-8">
-                <!-- Google -->
-                <button class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition shadow-sm">
-                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="Google">
-                </button>
-                <!-- Facebook -->
-                <button class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition shadow-sm text-[#1877F2]">
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                </button>
-                <!-- Apple -->
-                <button class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition shadow-sm text-black">
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.14-.49-3.23 0-1.02.47-2.1.53-3.03-.43C4.18 16.7 3.3 11.2 6 8.16c.94-1.07 2.21-1.74 3.52-1.77 1.05-.04 2.05.64 2.67.64.63 0 1.83-.81 3.1-.71 1.63.1 2.87.69 3.65 1.76-3.1 1.79-2.62 5.9.46 7.1-1.03 2.67-2.22 4.47-2.35 4.54zm-2.92-15.68c.52-1.28.08-2.61-.83-3.6-1.12-1.1-2.62-1.35-3.6-.8-.58 1.13-.19 2.53.86 3.63 1.09 1.15 2.7 1.34 3.57.77z"/></svg>
-                </button>
-            </div>
-
             <!-- Footer Link -->
-            <p class="text-center text-sm text-gray-600 font-medium">
+            <p class="text-center text-sm text-gray-600 font-medium mt-6">
                 Don't have an account?
                 <a href="{{ route('register') }}" class="text-gray-500 font-semibold hover:underline">Sign Up here</a>
             </p>

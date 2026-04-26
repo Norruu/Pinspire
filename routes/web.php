@@ -6,10 +6,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Models\Pin;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 
@@ -32,6 +29,37 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // NEW: Server-side Image Download Route to bypass CORS
+    Route::get('/download-image', function (Request $request) {
+        $url = $request->query('url');
+        $filename = $request->query('name', 'pinspire-image.jpg');
+
+        if (!$url) abort(400, 'Image URL is required');
+
+        // If it's a local file (uploaded by admin)
+        if (!str_starts_with($url, 'http')) {
+            $path = str_replace(asset('storage/'), '', $url);
+            if (Storage::disk('public')->exists($path)) {
+                return Storage::disk('public')->download($path, $filename);
+            }
+            abort(404, 'Local file not found');
+        }
+
+        // If it's an external URL (Pinterest/Unsplash link)
+        try {
+            $contents = file_get_contents($url);
+            $finfo = new finfo(FILEINFO_MIME_TYPE);
+            $mimeType = $finfo->buffer($contents);
+
+            return response($contents, 200, [
+                'Content-Type' => $mimeType,
+                'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+            ]);
+        } catch (\Exception $e) {
+            abort(404, 'Could not fetch external image');
+        }
+    })->name('download.image');
 });
 
 Route::get('/admin/dashboard', function () {

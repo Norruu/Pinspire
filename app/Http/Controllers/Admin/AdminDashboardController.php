@@ -35,6 +35,9 @@ class AdminDashboardController extends Controller
             return back()->with('error', 'You cannot change your own role.');
         }
 
+        $user->is_admin = !$user->is_admin;
+        $user->save();
+
         $user->update(['is_admin' => !$user->is_admin]);
         return back()->with('success', 'User role updated successfully.');
     }
@@ -95,28 +98,32 @@ class AdminDashboardController extends Controller
             'title' => $request->input('title'),
         ];
 
-        // Option 1: Did they upload a new file from their laptop?
         if ($request->hasFile('image_upload')) {
-            // Delete the old image to save space (if it was stored locally)
             if ($pin->image && !str_starts_with($pin->image, 'http')) {
                 Storage::disk('public')->delete($pin->image);
             }
-            // Save the new image
             $dataToUpdate['image'] = $request->file('image_upload')->store('pins', 'public');
         }
-        // Option 2: Did they provide a new link instead?
         elseif ($request->filled('image_link')) {
-            // Delete the old image to save space (if it was stored locally)
             if ($pin->image && !str_starts_with($pin->image, 'http') && $pin->image !== $request->input('image_link')) {
                 Storage::disk('public')->delete($pin->image);
             }
-            // Save the new link
             $dataToUpdate['image'] = $request->input('image_link');
         }
-        // If neither was provided, it simply keeps the existing image!
 
         $pin->update($dataToUpdate);
 
         return back()->with('success', 'Pin updated successfully.');
+    }
+
+        public function deletePin(Pin $pin)
+    {
+        if ($pin->image && !str_starts_with($pin->image, 'http')) {
+            Storage::disk('public')->delete($pin->image);
+        }
+
+        $pin->delete();
+
+        return back()->with('success', 'Pin deleted successfully.');
     }
 }
